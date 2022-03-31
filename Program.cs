@@ -10,17 +10,14 @@ namespace Cursor_Key
             int size = 3;
             string[] BoardString = new string[size];
             char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
-
             for (int j = 0; j < size; j++)
             {
                 BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
             }
-
-
             PrintBoard(BoardString, ref BoardChar);
-
             TestCheckbomb(BoardChar); // Testing method
             ManualMines(BoardChar); //Testing method
+            // Console.WriteLine("All tests passed");
         }
         // Method to let the cursor move inside the Board
         static void TryMove(int proposedRow, int proposedColumn, char[][] mapRows)
@@ -69,7 +66,7 @@ namespace Cursor_Key
 
             Debug.Assert(MineCounter(FakeMap) == 3);
             Debug.Assert(MineCounter(FakeMap) != 8);
-            Console.WriteLine("All tests passed");
+
         }
         // Method to count how many mines are in the board.
         static int MineCounter(char[][] Board)
@@ -174,7 +171,6 @@ namespace Cursor_Key
             Debug.Assert(CheckBomb(0, 2, FakeMap) == true);
             Debug.Assert(CheckBomb(2, 0, FakeMap) == false);
 
-            Console.WriteLine("All tests passed");
         }
 
         static void Instructions() // presentation for the user
@@ -326,50 +322,53 @@ namespace Cursor_Key
             } while (true);
             return size;
         }
-        static void Main()
+        static void SetBoard(int size, out string[] BoardString, out char[][] BoardChar)
         {
-            Instructions();
-            Console.Clear();
-            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
-
-            // Methodtests(); // Method to run tests
-
-            int size = AskNumBombs();   // Asking the player how many rows and columns wants
-            Console.Clear();
-
-            string[] BoardString = new string[size];
-            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
-
+            BoardString = new string[size];
+            BoardChar = new char[size][];
             for (int j = 0; j < size; j++)
             {
                 BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
             }
-
-            PrintBoard(BoardString, ref BoardChar); // printing the board
-            RandomMines(size, ref BoardChar); // placing the cells
-
+        }
+        static void GameRun(Stopwatch stopwatch, char[][] BoardChar, out int errors, out int scores)
+        {
             stopwatch.Start();
-
-            int errors = 0;
-            int scores = 0;
-
+            errors = 0;
+            scores = 0;
             ConsoleKey keyIn;
             Console.CursorTop = 0;
             Console.CursorLeft = 0;
-
             keyIn = Movement(stopwatch, BoardChar, ref errors, ref scores);
-
             Console.Clear();
-
+        }
+        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores)
+        {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
-
             if (scores == MineCounter(BoardChar)) // this prints the final message for the user when he finishes
             {
                 Console.WriteLine("Congratulations! You won! Your");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
             }
+        }
+        static void Main()
+        {
+            Instructions();
+            Console.Clear();
+            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
+            Methodtests(); // Method to run tests
+            int size = AskNumBombs();   // Asking the player how many rows and columns wants
+            Console.Clear();
+            string[] BoardString;
+            char[][] BoardChar;
+            SetBoard(size, out BoardString, out BoardChar);
+            PrintBoard(BoardString, ref BoardChar); // printing the board
+            RandomMines(size, ref BoardChar); // placing the cells
+            int errors, scores;
+            GameRun(stopwatch, BoardChar, out errors, out scores);
+            Win(stopwatch, BoardChar, errors, scores);
         }
 
 
