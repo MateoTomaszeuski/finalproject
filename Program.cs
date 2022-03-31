@@ -355,10 +355,10 @@ namespace Cursor_Key
         }
         static void Main()
         {
+            // Methodtests(); // Method to run tests
             Instructions();
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
-            Methodtests(); // Method to run tests
             int size = AskNumBombs();   // Asking the player how many rows and columns wants
             Console.Clear();
             string[] BoardString;
