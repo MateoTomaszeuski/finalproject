@@ -169,7 +169,7 @@ namespace Cursor_Key
             Console.WriteLine("All tests passed");
         }
 
-        static void Instructions()
+        static void Instructions() // presentation for the user
         {
             Console.Clear();
             string input = " ";
@@ -187,7 +187,7 @@ namespace Cursor_Key
                 Console.WriteLine();
                 Console.WriteLine("If you think that you are ready to go, type \"done\", if you need a TUTORIAl, type \"help\": ");
                 input = Console.ReadLine();
-                if (input == "help")
+                if (input == "help") // if the user needs more help, the program will print a tutorial.
                 {
                     Console.Clear();
                     Console.WriteLine("It seems that you need help... Be welcome to the explanation of MINESWEEPER");
@@ -220,6 +220,7 @@ namespace Cursor_Key
             int size = 0;
 
             // Methodtests(); // Method to run tests
+
             // Asking the player how many rows and columns wants
             do
             {
