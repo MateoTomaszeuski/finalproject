@@ -222,7 +222,7 @@ namespace Cursor_Key
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
 
-            StreamWriter outfile = new StreamWriter("outFile.txt"); // Here I am creating a file where it will be printed the board
+           
             int size = 0;
 
             // Methodtests(); // Method to run tests
