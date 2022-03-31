@@ -57,6 +57,8 @@ namespace Cursor_Key
             {
                 Board[randomCol.Next(0, Board.Length)][randomRow.Next(0, Board.Length)] = '*';
             }
+            Console.WriteLine("The amount of Bombs to find is: " + MineCounter(Board)); // information for the user to let him know how many bombs are placed
+
         }
 
         static void ManualMines(char[][] FakeMap) // Method Test
@@ -302,17 +304,9 @@ namespace Cursor_Key
             } while (true);
             return keyIn;
         }
-        static void Main()
+        static int AskNumBombs()
         {
-            Instructions();
-
-            Console.Clear();
-            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
-
-            // Methodtests(); // Method to run tests
-
-            int size = 0;
-            // Asking the player how many rows and columns wants
+            int size;
             do
             {
                 Console.WriteLine("How many Rows and Columns do you want? (please enter just 1 number)");
@@ -330,7 +324,17 @@ namespace Cursor_Key
                     Console.WriteLine($"That int doesn't fit. Please enter a number between {0} and {int.MaxValue}");
                 }
             } while (true);
+            return size;
+        }
+        static void Main()
+        {
+            Instructions();
+            Console.Clear();
+            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
 
+            // Methodtests(); // Method to run tests
+
+            int size = AskNumBombs();   // Asking the player how many rows and columns wants
             Console.Clear();
 
             string[] BoardString = new string[size];
@@ -342,10 +346,7 @@ namespace Cursor_Key
             }
 
             PrintBoard(BoardString, ref BoardChar); // printing the board
-
             RandomMines(size, ref BoardChar); // placing the cells
-
-            Console.WriteLine("The amount of Bombs to find is: " + MineCounter(BoardChar)); // information for the user to let him know how many bombs are placed
 
             stopwatch.Start();
 
