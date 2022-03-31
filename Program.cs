@@ -48,12 +48,12 @@ namespace Cursor_Key
         }
 
         // Method to place Mines in random Places
-        static void RandomMines(int bombs, ref char[][] Board)
+        static void RandomMines(int size, ref char[][] Board)
         {
-
+            int amountbombs = ((size * size) * 20) / 100; // setting the amount of bombs to be the 20% aprox of all the cells
             System.Random randomCol = new System.Random(1);
             System.Random randomRow = new System.Random(2);
-            for (int i = 0; i < bombs; i++)
+            for (int i = 0; i < amountbombs; i++)
             {
                 Board[randomCol.Next(0, Board.Length)][randomRow.Next(0, Board.Length)] = '*';
             }
@@ -215,65 +215,9 @@ namespace Cursor_Key
                 Console.Clear();
             }
         }
-        static void Main()
+        static ConsoleKey Movement(Stopwatch stopwatch, char[][] BoardChar, ref int errors, ref int scores)
         {
-            Instructions();
-
-            Console.Clear();
-            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
-
-           
-            int size = 0;
-
-            // Methodtests(); // Method to run tests
-
-            // Asking the player how many rows and columns wants
-            do
-            {
-                Console.WriteLine("How many Rows and Columns do you want? (please enter just 1 number)");
-                try
-                {
-                    size = int.Parse(Console.ReadLine());
-                    break;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("That's not an int! (try again)");
-                }
-                catch (OverflowException)
-                {
-                    Console.WriteLine($"That int doesn't fit. Please enter a number between {0} and {int.MaxValue}");
-                }
-            } while (true);
-
-            Console.Clear();
-
-            string[] BoardString = new string[size];
-            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
-
-            for (int j = 0; j < size; j++)
-            {
-                BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
-            }
-
-            PrintBoard(BoardString, ref BoardChar); // printing the board
-            
-            int amountbombs = ((size * size) * 20) / 100; // setting the amount of bombs to be the 20% aprox of all the cells
-
-
-            RandomMines(amountbombs, ref BoardChar); // placing the cells
-
-            Console.WriteLine("The amount of Bombs to find is: " + MineCounter(BoardChar)); // information for the user to let him know how many bombs are placed
-
-            stopwatch.Start();
-
-            int errors = 0;
-            int scores = 0;
-
             ConsoleKey keyIn;
-            Console.CursorTop = 0;
-            Console.CursorLeft = 0;
-
             do // do-while loop to get the value of the keys that are pressed and to give an answer
             {
                 keyIn = Console.ReadKey(true).Key;
@@ -356,11 +300,69 @@ namespace Cursor_Key
                 }
 
             } while (true);
+            return keyIn;
+        }
+        static void Main()
+        {
+            Instructions();
+
+            Console.Clear();
+            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
+
+            // Methodtests(); // Method to run tests
+
+            int size = 0;
+            // Asking the player how many rows and columns wants
+            do
+            {
+                Console.WriteLine("How many Rows and Columns do you want? (please enter just 1 number)");
+                try
+                {
+                    size = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("That's not an int! (try again)");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine($"That int doesn't fit. Please enter a number between {0} and {int.MaxValue}");
+                }
+            } while (true);
+
+            Console.Clear();
+
+            string[] BoardString = new string[size];
+            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
+
+            for (int j = 0; j < size; j++)
+            {
+                BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
+            }
+
+            PrintBoard(BoardString, ref BoardChar); // printing the board
+
+            RandomMines(size, ref BoardChar); // placing the cells
+
+            Console.WriteLine("The amount of Bombs to find is: " + MineCounter(BoardChar)); // information for the user to let him know how many bombs are placed
+
+            stopwatch.Start();
+
+            int errors = 0;
+            int scores = 0;
+
+            ConsoleKey keyIn;
+            Console.CursorTop = 0;
+            Console.CursorLeft = 0;
+
+            keyIn = Movement(stopwatch, BoardChar, ref errors, ref scores);
 
             Console.Clear();
 
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
+
             if (scores == MineCounter(BoardChar)) // this prints the final message for the user when he finishes
             {
                 Console.WriteLine("Congratulations! You won! Your");
@@ -368,6 +370,7 @@ namespace Cursor_Key
                 Console.WriteLine($"You had {errors} errors");
             }
         }
+
 
     }
 }
