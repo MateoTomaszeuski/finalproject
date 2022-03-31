@@ -7,9 +7,15 @@ namespace Cursor_Key
         // Method to run tests on methods
         static void Methodtests()
         {
+            int size = 3;
+            string[] BoardString = new string[size];
+            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
 
-            string[] BoardString = File.ReadAllLines("testboard.txt");
-            char[][] BoardChar = new char[BoardString.Length][];
+            for (int j = 0; j < size; j++)
+            {
+                BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
+            }
+
 
             PrintBoard(BoardString, ref BoardChar);
 
@@ -241,20 +247,17 @@ namespace Cursor_Key
             } while (true);
 
             Console.Clear();
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    outfile.Write("#");             // filling the file with cells inside the range that the user gave
-                }
-                outfile.WriteLine();
-            }
-            outfile.Close();
 
-            string[] BoardString = File.ReadAllLines("outFile.txt"); // reading the BoardFile
-            char[][] BoardChar = new char[BoardString.Length][]; // Creating the actual Board as a char multi-dimentional array
+            string[] BoardString = new string[size];
+            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
+
+            for (int j = 0; j < size; j++)
+            {
+                BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
+            }
 
             PrintBoard(BoardString, ref BoardChar); // printing the board
+            
             int amountbombs = ((size * size) * 20) / 100; // setting the amount of bombs to be the 20% aprox of all the cells
 
 
@@ -339,7 +342,7 @@ namespace Cursor_Key
                             errors++;
                         }
                         break;
-                    
+
                 }
                 if (keyIn == ConsoleKey.Escape) // if the player hits Escape, he is surrendering, so the game will finish
                 {
