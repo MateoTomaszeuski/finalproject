@@ -173,13 +173,16 @@ namespace Cursor_Key
 
         }
 
-        static void Instructions() // presentation for the user
+        static void Instructions(ref string name) // presentation for the user
         {
             Console.Clear();
             string input = " ";
             while (input != "done")
             {
                 Console.WriteLine("Be welcome to MINESWEEPER");
+                Console.WriteLine("Please write your name below:");
+                name = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine("Your objective is to find all the bombs on the board");
                 Console.WriteLine();
                 Console.WriteLine("To move arround the board you are able to use WASD, or the arrows on your keyboard");
@@ -353,10 +356,12 @@ namespace Cursor_Key
                 Console.WriteLine($"You had {errors} errors");
             }
         }
+
         static void Main()
         {
             // Methodtests(); // Method to run tests
-            Instructions();
+            string name = " ";
+            Instructions(ref name);
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
             int size = AskNumBombs();   // Asking the player how many rows and columns wants
@@ -369,9 +374,8 @@ namespace Cursor_Key
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores);
+
         }
-
-
     }
 }
 
