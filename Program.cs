@@ -52,7 +52,7 @@ namespace Game
             System.Random randomRow = new System.Random(2);
             for (int i = 0; i < amountbombs; i++)
             {
-                Board[randomCol.Next(0, Board.Length)][randomRow.Next(0, Board.Length)] = '*';
+                Board[randomCol.NextInt64(0, Board.Length)][randomRow.NextInt64(0, Board.Length)] = '*';
             }
             Console.WriteLine("The amount of Bombs to find is: " + MineCounter(Board)); // information for the user to let him know how many bombs are placed
 
