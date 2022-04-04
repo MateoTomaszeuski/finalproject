@@ -356,7 +356,6 @@ namespace Cursor_Key
                 Console.WriteLine($"You had {errors} errors");
             }
         }
-
         static void Main()
         {
             // Methodtests(); // Method to run tests
@@ -374,7 +373,6 @@ namespace Cursor_Key
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores);
-
         }
     }
 }
