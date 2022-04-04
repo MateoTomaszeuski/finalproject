@@ -57,7 +57,6 @@ namespace Cursor_Key
             Console.WriteLine("The amount of Bombs to find is: " + MineCounter(Board)); // information for the user to let him know how many bombs are placed
 
         }
-
         static void ManualMines(char[][] FakeMap) // Method Test
         {
             FakeMap[0][0] = '*';
@@ -345,13 +344,13 @@ namespace Cursor_Key
             keyIn = Movement(stopwatch, BoardChar, ref errors, ref scores);
             Console.Clear();
         }
-        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores)
+        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
             if (scores == MineCounter(BoardChar)) // this prints the final message for the user when he finishes
             {
-                Console.WriteLine("Congratulations! You won! Your");
+                Console.WriteLine($"Congratulations {name}! You won!");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
             }
@@ -372,11 +371,11 @@ namespace Cursor_Key
             RandomMines(size, ref BoardChar); // placing the cells
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
-            Win(stopwatch, BoardChar, errors, scores);
+            Win(stopwatch, BoardChar, errors, scores, name);
         }
     }
 }
-
+// add highscores
 // add 1 foreach
 // add parallel arrays 
 // add 1 list
