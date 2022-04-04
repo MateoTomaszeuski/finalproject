@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Cursor_Key
+namespace Game
 {
     class program
     {
@@ -355,6 +355,7 @@ namespace Cursor_Key
                 Console.WriteLine($"You had {errors} errors");
             }
         }
+
         static void Main()
         {
             // Methodtests(); // Method to run tests
