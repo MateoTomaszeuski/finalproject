@@ -21,7 +21,7 @@ namespace Game
             PrintBoard(BoardString, ref BoardChar);
             TestCheckbomb(BoardChar); // Testing method
             ManualMines(BoardChar); //Testing method
-            // Console.WriteLine("All tests passed");
+            Console.WriteLine("All tests passed");
         }
         // Method to let the cursor move inside the Board
         static void TryMove(int proposedRow, int proposedColumn, char[][] mapRows)
