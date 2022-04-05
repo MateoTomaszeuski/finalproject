@@ -170,8 +170,9 @@ namespace Game
             Debug.Assert(CheckBomb(2, 0, FakeMap) == false);
 
         }
-
-        static void Instructions(ref string name) // presentation for the user
+       
+        // presentation for the user
+        static void Instructions(ref string name)
         {
             Console.Clear();
             string input = " ";
@@ -215,6 +216,8 @@ namespace Game
                 Console.Clear();
             }
         }
+
+        // method that controls the movement on the board
         static ConsoleKey Movement(Stopwatch stopwatch, char[][] BoardChar, ref int errors, ref int scores)
         {
             ConsoleKey keyIn;
@@ -302,7 +305,9 @@ namespace Game
             } while (true);
             return keyIn;
         }
-        static int AskNumBombs()
+       
+       // Method to get the input of the user of how big he want the board
+        static int AskNumRowsandCols()
         {
             int size;
             do
@@ -324,6 +329,8 @@ namespace Game
             } while (true);
             return size;
         }
+        
+        // method that creates the board
         static void SetBoard(int size, out string[] BoardString, out char[][] BoardChar)
         {
             BoardString = new string[size];
@@ -333,6 +340,8 @@ namespace Game
                 BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
             }
         }
+        
+        // method that runs the game
         static void GameRun(Stopwatch stopwatch, char[][] BoardChar, out int errors, out int scores)
         {
             stopwatch.Start();
@@ -344,6 +353,8 @@ namespace Game
             keyIn = Movement(stopwatch, BoardChar, ref errors, ref scores);
             Console.Clear();
         }
+        
+        // method that is used when the user winsd
         static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
@@ -355,6 +366,8 @@ namespace Game
                 Console.WriteLine($"You had {errors} errors");
             }
         }
+
+        // method used to prin the leaderboard
         static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores, ref List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
@@ -385,21 +398,21 @@ namespace Game
             string[] BoardString;
             char[][] BoardChar;
             int errors, scores;
-           
+
             Instructions(ref name);
             Console.Clear();
-           
-            int size = AskNumBombs();   // Asking the player how many rows and columns wants
+
+            int size = AskNumRowsandCols();   // Asking the player how many rows and columns wants
             String fileName = "highsocres" + size + "x" + size + ".txt";
             Console.Clear();
-           
+
             SetBoard(size, out BoardString, out BoardChar);
             PrintBoard(BoardString, ref BoardChar); // printing the board
             RandomMines(size, ref BoardChar); // placing the cells
-           
+
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name);
-           
+
             PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
         }
     }
