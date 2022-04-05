@@ -376,7 +376,7 @@ namespace Game
             }
             if (elapsedseconds < scorelist[10])
             {
-
+                
             }
 
         }
@@ -387,7 +387,6 @@ namespace Game
             {
                 // this line creates the file with the name if it doesn't exist
                 // if it already exists it will not do anyrhing
-
             }
 
             using (StreamReader reader = new StreamReader(file))
