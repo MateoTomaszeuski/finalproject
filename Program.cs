@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-
-
+﻿using System.Diagnostics;
 namespace Game
 {
     class program
@@ -368,7 +363,6 @@ namespace Game
 
             using (StreamWriter writer = new StreamWriter(fileName, true))
             {
-                writer.WriteLine();
                 writer.WriteLine(elapsedseconds + ", " + name);
             }
             // need to do sorting method
