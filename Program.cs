@@ -369,14 +369,13 @@ namespace Game
             {
                 using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
-
                     writer.WriteLine(name + ", " + elapsedseconds);
-
                 }
+                // need to do sorting method
             }
             if (elapsedseconds < scorelist[10])
             {
-                
+                // need to do a sorting method   
             }
 
         }
