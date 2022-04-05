@@ -361,11 +361,11 @@ namespace Game
                 Console.WriteLine($"You had {errors} errors");
             }
         }
-        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores)
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores, ref List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
-            if (scores == MineCounter(BoardChar) && BelongInTop10(fileName, elapsedseconds))
+            if (scores == MineCounter(BoardChar) && BelongInTop10(fileName, elapsedseconds, ref scorelist))
             {
                 using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
@@ -374,18 +374,25 @@ namespace Game
 
                 }
             }
+            if (elapsedseconds < scorelist[10])
+            {
+
+            }
+
         }
-        static bool BelongInTop10(string file, double time)
+        static bool BelongInTop10(string file, double time, ref List<double> scores)
         {
             // read all items
             using (StreamWriter writer = new StreamWriter(file))
             {
+                // this line creates the file with the name if it doesn't exist
+                // if it already exists it will not do anyrhing
 
             }
 
             using (StreamReader reader = new StreamReader(file))
             {
-                List<double> scores = new List<double>();
+
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -393,30 +400,20 @@ namespace Game
                     double score = double.Parse(nameAndScore[1]);
                     scores.Add(score);
                 }
-                reader.Close();
-                // if  lenght < 10, return true
-                if (scores.Count < 10)
-                {
-                    using (StreamWriter writer2 = new StreamWriter(file))
-                    {
-                        writer2.WriteLine("Name, Time:");
-                    }
-                    return true;
-                }
-                // sort
-                scores.Sort();
-                // if wpm < last, true
-                if (time < scores[10])
-                {
-                    return true;
-                }
-                return false;
             }
+            // if  lenght < 10, return true
+            if (scores.Count < 10)
+            {
+                return true;
+            }
+            return false;
+
         }
         static void Main()
         {
             // Methodtests(); // Method to run tests
             string name = " ";
+            List<double> scorelist = new List<double>();
             Instructions(ref name);
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
@@ -431,7 +428,7 @@ namespace Game
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name);
-            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores);
+            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
         }
     }
 }
