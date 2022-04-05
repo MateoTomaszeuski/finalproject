@@ -1,5 +1,10 @@
 ﻿using System.Diagnostics;
 
+using System;
+using System.IO;
+using System.Text;
+
+
 namespace Game
 {
     class program
@@ -193,6 +198,7 @@ namespace Game
                 Console.WriteLine();
                 Console.WriteLine("If you think that you are ready to go, type \"done\", if you need a TUTORIAl, type \"help\": ");
                 input = Console.ReadLine();
+
                 if (input == "help") // if the user needs more help, the program will print a tutorial.
                 {
                     Console.Clear();
@@ -355,11 +361,55 @@ namespace Game
                 Console.WriteLine($"You had {errors} errors");
             }
         }
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name)
+        {
+            double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
+            elapsedseconds += errors;
+            if (BelongInTop10(fileName, elapsedseconds))
+            {
+                using (StreamWriter writer = new StreamWriter(fileName, true))
+                {
 
+                    writer.WriteLine(size + "x" + size + "," + name + "," + elapsedseconds);
+
+                }
+            }
+        }
+        static bool BelongInTop10(string file, double time)
+        {
+            // read all items
+
+            using (StreamReader reader = new StreamReader(file))
+            {
+                List<double> scores = new List<double>();
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] nameAndScore = line.Split(",");
+                    double score = double.Parse(nameAndScore[2]);
+                    scores.Add(score);
+                }
+                reader.Close();
+                // if  lenght < 10, return true
+                if (scores.Count < 10)
+                {
+                    return true;
+                }
+                // sort
+                scores.Sort();
+                // if wpm < last, true
+                if (time < scores[10])
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
         static void Main()
         {
             // Methodtests(); // Method to run tests
             string name = " ";
+            String fileName = "highsocres.txt";
             Instructions(ref name);
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
@@ -373,9 +423,11 @@ namespace Game
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name);
+            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name);
         }
     }
 }
+
 // add highscores
 // add 1 foreach
 // add parallel arrays 
