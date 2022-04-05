@@ -381,20 +381,25 @@ namespace Game
             // Methodtests(); // Method to run tests
             string name = " ";
             List<double> scorelist = new List<double>();
+            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
+            string[] BoardString;
+            char[][] BoardChar;
+            int errors, scores;
+           
             Instructions(ref name);
             Console.Clear();
-            Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
+           
             int size = AskNumBombs();   // Asking the player how many rows and columns wants
             String fileName = "highsocres" + size + "x" + size + ".txt";
             Console.Clear();
-            string[] BoardString;
-            char[][] BoardChar;
+           
             SetBoard(size, out BoardString, out BoardChar);
             PrintBoard(BoardString, ref BoardChar); // printing the board
             RandomMines(size, ref BoardChar); // placing the cells
-            int errors, scores;
+           
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name);
+           
             PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
         }
     }
