@@ -64,7 +64,6 @@ namespace Game
 
             Debug.Assert(MineCounter(FakeMap) == 3);
             Debug.Assert(MineCounter(FakeMap) != 8);
-
         }
         // Method to count how many mines are in the board.
         static int MineCounter(char[][] Board)
@@ -354,7 +353,7 @@ namespace Game
             Console.Clear();
         }
 
-        // method that is used when the user wins
+        // method that is used when the user winsd
         static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size, ref List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
