@@ -54,7 +54,6 @@ namespace Game
                 Board[randomCol.NextInt64(0, Board.Length)][randomRow.NextInt64(0, Board.Length)] = '*';
             }
             Console.WriteLine("The amount of Bombs to find is: " + MineCounter(Board)); // information for the user to let him know how many bombs are placed
-
         }
         static void ManualMines(char[][] FakeMap) // Method Test
         {
