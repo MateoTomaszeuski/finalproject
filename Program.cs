@@ -376,13 +376,11 @@ namespace Game
             Array.Sort(filetosort);
             using (StreamWriter writer = new StreamWriter(fileName, false))
             {
-                for (int i = 0; i < filetosort.Length; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     writer.WriteLine(filetosort[i]);
                 }
             }
-
-
         }
         static void Main()
         {

@@ -6,6 +6,5 @@
 2.5, Fran
 4.73, Juan
 5.9, Nacho
+6.022, Hernan
 6.803, Pedro
-8.7, Esteban
-9.8, Fede
