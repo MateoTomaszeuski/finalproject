@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
-
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -365,46 +364,24 @@ namespace Game
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
-            if (scores == MineCounter(BoardChar) && BelongInTop10(fileName, elapsedseconds, ref scorelist))
+            string[] filetosort;
+
+            using (StreamWriter writer = new StreamWriter(fileName, true))
             {
-                using (StreamWriter writer = new StreamWriter(fileName, true))
+                writer.WriteLine();
+                writer.WriteLine(elapsedseconds + ", " + name);
+            }
+            // need to do sorting method
+            filetosort = File.ReadAllLines(fileName);
+            Array.Sort(filetosort);
+            using (StreamWriter writer = new StreamWriter(fileName, false))
+            {
+                for (int i = 0; i < filetosort.Length; i++)
                 {
-                    writer.WriteLine(name + ", " + elapsedseconds);
-                }
-                // need to do sorting method
-            }
-            if (elapsedseconds < scorelist[10])
-            {
-                // need to do a sorting method   
-            }
-
-        }
-        static bool BelongInTop10(string file, double time, ref List<double> scores)
-        {
-            // read all items
-            using (StreamWriter writer = new StreamWriter(file))
-            {
-                // this line creates the file with the name if it doesn't exist
-                // if it already exists it will not do anyrhing
-            }
-
-            using (StreamReader reader = new StreamReader(file))
-            {
-
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] nameAndScore = line.Split(",");
-                    double score = double.Parse(nameAndScore[1]);
-                    scores.Add(score);
+                    writer.WriteLine(filetosort[i]);
                 }
             }
-            // if  lenght < 10, return true
-            if (scores.Count < 10)
-            {
-                return true;
-            }
-            return false;
+
 
         }
         static void Main()

@@ -1,0 +1,11 @@
+0.9, Dela
+0.923, Maf
+1.8, Tomi
+12.9, Coco
+15.9, Nico
+2.5, Fran
+4.73, Juan
+5.9, Nacho
+6.803, Pedro
+8.7, Esteban
+9.8, Fede
