@@ -170,7 +170,7 @@ namespace Game
             Debug.Assert(CheckBomb(2, 0, FakeMap) == false);
 
         }
-       
+
         // presentation for the user
         static void Instructions(ref string name)
         {
@@ -305,8 +305,8 @@ namespace Game
             } while (true);
             return keyIn;
         }
-       
-       // Method to get the input of the user of how big he want the board
+
+        // Method to get the input of the user of how big he want the board
         static int AskNumRowsandCols()
         {
             int size;
@@ -329,7 +329,7 @@ namespace Game
             } while (true);
             return size;
         }
-        
+
         // method that creates the board
         static void SetBoard(int size, out string[] BoardString, out char[][] BoardChar)
         {
@@ -340,7 +340,7 @@ namespace Game
                 BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
             }
         }
-        
+
         // method that runs the game
         static void GameRun(Stopwatch stopwatch, char[][] BoardChar, out int errors, out int scores)
         {
@@ -353,9 +353,9 @@ namespace Game
             keyIn = Movement(stopwatch, BoardChar, ref errors, ref scores);
             Console.Clear();
         }
-        
+
         // method that is used when the user winsd
-        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name)
+        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size, ref List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
@@ -364,10 +364,11 @@ namespace Game
                 Console.WriteLine($"Congratulations {name}! You won!");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
+                PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
             }
         }
 
-        // method used to prin the leaderboard
+        // method used to print the leaderboard
         static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores, ref List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
@@ -378,12 +379,13 @@ namespace Game
             {
                 writer.WriteLine(elapsedseconds + ", " + name);
             }
-            // need to do sorting method
+
             filetosort = File.ReadAllLines(fileName);
             Array.Sort(filetosort);
+
             using (StreamWriter writer = new StreamWriter(fileName, false))
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < filetosort.Length; i++)
                 {
                     writer.WriteLine(filetosort[i]);
                 }
@@ -411,9 +413,9 @@ namespace Game
             RandomMines(size, ref BoardChar); // placing the cells
 
             GameRun(stopwatch, BoardChar, out errors, out scores);
-            Win(stopwatch, BoardChar, errors, scores, name);
+            Win(stopwatch, BoardChar, errors, scores, name, fileName, size, ref scorelist);
 
-            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
+
         }
     }
 }
