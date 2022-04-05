@@ -361,16 +361,16 @@ namespace Game
                 Console.WriteLine($"You had {errors} errors");
             }
         }
-        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name)
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
-            if (BelongInTop10(fileName, elapsedseconds))
+            if (scores == MineCounter(BoardChar) && BelongInTop10(fileName, elapsedseconds))
             {
                 using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
 
-                    writer.WriteLine(size + "x" + size + "," + name + "," + elapsedseconds);
+                    writer.WriteLine(size + "x" + size + ", " + name + ", " + elapsedseconds);
 
                 }
             }
@@ -378,6 +378,10 @@ namespace Game
         static bool BelongInTop10(string file, double time)
         {
             // read all items
+            using (StreamWriter writer = new StreamWriter(file))
+            {
+
+            }
 
             using (StreamReader reader = new StreamReader(file))
             {
@@ -409,11 +413,11 @@ namespace Game
         {
             // Methodtests(); // Method to run tests
             string name = " ";
-            String fileName = "highsocres.txt";
             Instructions(ref name);
             Console.Clear();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
             int size = AskNumBombs();   // Asking the player how many rows and columns wants
+            String fileName = "highsocres" + size + "x" + size + ".txt";
             Console.Clear();
             string[] BoardString;
             char[][] BoardChar;
@@ -423,13 +427,11 @@ namespace Game
             int errors, scores;
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name);
-            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name);
+            PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores);
         }
     }
 }
 
-// add highscores
 // add 1 foreach
 // add parallel arrays 
-// add 1 list
 // add tuple (?)    
