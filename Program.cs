@@ -370,7 +370,7 @@ namespace Game
                 using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
 
-                    writer.WriteLine(size + "x" + size + ", " + name + ", " + elapsedseconds);
+                    writer.WriteLine(name + ", " + elapsedseconds);
 
                 }
             }
@@ -390,13 +390,17 @@ namespace Game
                 {
                     string line = reader.ReadLine();
                     string[] nameAndScore = line.Split(",");
-                    double score = double.Parse(nameAndScore[2]);
+                    double score = double.Parse(nameAndScore[1]);
                     scores.Add(score);
                 }
                 reader.Close();
                 // if  lenght < 10, return true
                 if (scores.Count < 10)
                 {
+                    using (StreamWriter writer2 = new StreamWriter(file))
+                    {
+                        writer2.WriteLine("Name, Time:");
+                    }
                     return true;
                 }
                 // sort
