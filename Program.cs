@@ -415,7 +415,3 @@ namespace Game
         }
     }
 }
-
-// add 1 foreach
-// add parallel arrays 
-// add tuple (?)    
