@@ -6,12 +6,12 @@ namespace Game
         // Method to run tests on methods
         static void Methodtests()
         {
-            int size = 3;
-            string[] BoardString = new string[size];
-            char[][] BoardChar = new char[size][]; // Creating the actual Board as a char multi-dimentional array
-            for (int j = 0; j < size; j++)
+            const int testsize = 3;
+            string[] BoardString = new string[testsize];
+            char[][] BoardChar = new char[testsize][]; // Creating the actual Board as a char multi-dimentional array
+            for (int j = 0; j < testsize; j++)
             {
-                BoardString[j] = string.Concat(Enumerable.Repeat("#", size));
+                BoardString[j] = string.Concat(Enumerable.Repeat("#", testsize));
             }
             PrintBoard(BoardString, ref BoardChar);
             TestCheckbomb(BoardChar); // Testing method
