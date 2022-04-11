@@ -353,7 +353,7 @@ namespace Game
         }
 
         // method that is used when the user winsd
-        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size, ref List<double> scorelist)
+        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size,  List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
@@ -362,12 +362,12 @@ namespace Game
                 Console.WriteLine($"Congratulations {name}! You won!");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
-                PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores, ref scorelist);
+                PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores,  scorelist);
             }
         }
 
         // method used to print the leaderboard
-        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores, ref List<double> scorelist)
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores,  List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
@@ -411,7 +411,7 @@ namespace Game
             RandomMines(size, ref BoardChar); // placing the cells
 
             GameRun(stopwatch, BoardChar, out errors, out scores);
-            Win(stopwatch, BoardChar, errors, scores, name, fileName, size, ref scorelist);
+            Win(stopwatch, BoardChar, errors, scores, name, fileName, size, scorelist);
         }
     }
 }
