@@ -352,7 +352,7 @@ namespace Game
             Console.Clear();
         }
 
-        // method that is used when the user winsd
+        // method that is used when the user wins
         static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size,  List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
