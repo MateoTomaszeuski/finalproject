@@ -362,12 +362,12 @@ namespace Game
                 Console.WriteLine($"Congratulations {name}! You won!");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
-                PrintHighscores(fileName, stopwatch, BoardChar, errors, size, name, scores,  scorelist);
+                PrintHighscores(fileName, stopwatch, errors, name,  scorelist);
             }
         }
 
         // method used to print the leaderboard
-        static void PrintHighscores(String fileName, Stopwatch stopwatch, char[][] BoardChar, int errors, int size, string name, int scores,  List<double> scorelist)
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, int errors, string name,  List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
