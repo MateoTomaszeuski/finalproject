@@ -353,7 +353,7 @@ namespace Game
         }
 
         // method that is used when the user wins
-        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size,  List<double> scorelist)
+        static void Win(Stopwatch stopwatch, char[][] BoardChar, int errors, int scores, string name, string fileName, int size, List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
@@ -362,12 +362,12 @@ namespace Game
                 Console.WriteLine($"Congratulations {name}! You won!");
                 Console.WriteLine($"The time that you made is: {elapsedseconds}s");
                 Console.WriteLine($"You had {errors} errors");
-                PrintHighscores(fileName, stopwatch, errors, name,  scorelist);
+                PrintHighscores(fileName, stopwatch, errors, name, scorelist);
             }
         }
 
         // method used to print the leaderboard
-        static void PrintHighscores(String fileName, Stopwatch stopwatch, int errors, string name,  List<double> scorelist)
+        static void PrintHighscores(String fileName, Stopwatch stopwatch, int errors, string name, List<double> scorelist)
         {
             double elapsedseconds = stopwatch.ElapsedMilliseconds / 1000.0;
             elapsedseconds += errors;
@@ -391,7 +391,6 @@ namespace Game
         }
         static void Main()
         {
-            // Methodtests(); // Method to run tests
             string name = " ";
             List<double> scorelist = new List<double>();
             Stopwatch stopwatch = new Stopwatch(); // Stopwatch to record the time of the player
@@ -412,6 +411,7 @@ namespace Game
 
             GameRun(stopwatch, BoardChar, out errors, out scores);
             Win(stopwatch, BoardChar, errors, scores, name, fileName, size, scorelist);
+            // Methodtests(); // Method to run tests
         }
     }
 }
