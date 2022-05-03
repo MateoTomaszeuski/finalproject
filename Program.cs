@@ -1,4 +1,9 @@
-﻿using System.Diagnostics;
+﻿/*
+Program made by: Mateo Tomaszeuski
+Date: 3/29/2022
+This program is a Minesweeper game to play in the console
+*/
+using System.Diagnostics;
 namespace Game
 {
     class program
