@@ -6,7 +6,7 @@ namespace Game
         // Method to run tests on methods
         static void Methodtests()
         {
-            const int testsize = 3;
+            int testsize = 3;
             string[] BoardString = new string[testsize];
             char[][] BoardChar = new char[testsize][]; // Creating the actual Board as a char multi-dimentional array
             for (int j = 0; j < testsize; j++)
@@ -387,7 +387,7 @@ namespace Game
                 {
                     writer.WriteLine(filetosort[i]);
                 }
-            }
+            } 
         }
         static void Main()
         {
@@ -415,3 +415,20 @@ namespace Game
         }
     }
 }
+
+/* Required elements Used 
+pass-by-reference (in/ref/out): Used un methods to create and use the Board, also to add the amount of errors that the user got
+arrays: Used while reading Files
+List: Used for the LeaderBoards
+2d or jagged arrays: Used to create the boards
+if/else: Used to check how many bombs are placed arruound the cell
+switch: Used in MOVEMENT METHOD
+at least 2 methods: 16  methods used
+at least 2 more methods: 16 methods used
+while/do-while: Used mainly for movement
+for:used to count how many bombs were placed on the board
+reading from a file: used to read the old leaderboard
+writing to a file: used to print the updated leaderboard
+input from the user: used to ask his name, and the size of the board
+parallel arrays or lists: list used for the scores
+*/
